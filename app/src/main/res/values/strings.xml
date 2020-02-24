@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CCPA Test App</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_info">Info</string>
+    <string name="nav_settings">Settings</string>
+    <string name="settings_label">Privacy Settings</string>
+    <string name="ccpa_label">CCPA Settings</string>
+    <string name="gdpr_label">GDPR Settings</string>
+    <string name="main_label">Privacy</string>
+    <string name="prviacy_message">Your data is used in order to personalize ads that tailor to your interests. In order to opt-out of the sale of your personal information to third parties, use the settings below. To find out more, read the privacy policy linked below.</string>
+    <string name="policylink"><a href="https://policies.warnerbros.com/privacy/">Privacy Policy</a>.</string>
+    <string name="policycenterlink"><a href="https://privacycenter.wb.com/">Privacy Center</a></string>
+    <string name="settings_name">Settings</string>
+</resources>
