@@ -62,7 +62,7 @@ public class SettingsFragment extends Fragment {
             getData.execute();
 
             settings = this.getActivity().getSharedPreferences("PREFS", MODE_PRIVATE);
-            dns = settings.getBoolean("DNS", true);
+            dns = settings.getBoolean("DNS", false);
             if(dns){
                 dnsSwitch.setChecked(true);
             }
