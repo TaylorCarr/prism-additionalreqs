@@ -20,13 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".PrivacySettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+            </intent-filter>
+        </activity>
+         <activity android:name=".MainActivity"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        />
+        <activity android:name=".VendorListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7896881809238324~6853151299"/>
-
     </application>
 
 </manifest>

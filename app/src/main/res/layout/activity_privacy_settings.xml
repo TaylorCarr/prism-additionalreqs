@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/toolbarBG">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"
+        />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/app_bar"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/darker_gray" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/privacyCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:elevation="100dp">
+
+        <TextView
+            android:id="@+id/cardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="13dp"
+            android:text="Do Not Sell My Information"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/policyMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/prviacy_message"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/policyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="240dp"
+            android:gravity="center_horizontal"
+            android:text="@string/policylink" />
+
+        <TextView
+            android:id="@+id/policyCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="255dp"
+            android:gravity="center_horizontal"
+            android:text="@string/policycenterlink" />
+
+        <TextView
+            android:id="@+id/vendorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="270dp"
+            android:text="@string/vendorlistlink" />
+
+        <Switch
+            android:id="@+id/dnsSwitch"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="175dp"
+            android:text="Do not sell data to third parties"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/linebottom"
+        android:layout_below="@id/privacyCard"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>

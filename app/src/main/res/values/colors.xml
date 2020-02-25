@@ -6,4 +6,5 @@
     <color name="toolbarBG">#FFFFFF</color>
     <color name="WBBlue">#005AAE</color>
     <color name="fragmentBG">#EEE5E9</color>
+    <color name="black">#000000</color>
 </resources>

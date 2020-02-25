@@ -7,8 +7,28 @@
     <string name="ccpa_label">CCPA Settings</string>
     <string name="gdpr_label">GDPR Settings</string>
     <string name="main_label">Privacy</string>
-    <string name="prviacy_message">Your data is used in order to personalize ads that tailor to your interests. In order to opt-out of the sale of your personal information to third parties, use the settings below. To find out more, read the privacy policy linked below.</string>
-    <string name="policylink"><a href="https://policies.warnerbros.com/privacy/">Privacy Policy</a>.</string>
-    <string name="policycenterlink"><a href="https://privacycenter.wb.com/">Privacy Center</a></string>
+    <string name="prviacy_message">We use personal information in order to create a personal experience for each of our users. Choosing to opt-out stops the sharing of your personal information which we use to curate relevant advertising from our third parties on this app. If you would like to learn more about our privacy policiy and how we use your information, you can visit the links to our privacy center, privacy policy and third-party vendors below.</string>
+    <string name="policylink">Privacy Policy</string>
+    <string name="policycenterlink">Privacy Center</string>
+    <string name="vendorlistlink">Vendor List</string>
+    <string name="vendorlisttext">We share your information with these third-party vendors in order to show relevant content to our users.</string>
     <string name="settings_name">Settings</string>
+    <string-array name="settings">
+        <item>Notification Settings</item>
+        <item>Privacy Settings</item>
+        <item>Privacy Policy</item>
+    </string-array>
+    <string-array name="descriptions">
+        <item>Change notification settings</item>
+        <item>Change privacy settings</item>
+        <item>View our privacy policy</item>
+    </string-array>
+    <string-array name="vendors">
+        <item>Vendor 1</item>
+        <item>Vendor 2</item>
+        <item>Vendor 3</item>
+        <item>Vendor 4</item>
+        <item>Vendor 5</item>
+        <item>Vendor 6</item>
+    </string-array>
 </resources>

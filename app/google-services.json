@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "225886272702",
+    "firebase_url": "https://ccpatestapp.firebaseio.com",
+    "project_id": "ccpatestapp",
+    "storage_bucket": "ccpatestapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225886272702:android:b41c1bd10284e996cff2ef",
+        "android_client_info": {
+          "package_name": "com.warnerbros.CCPATestApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225886272702-q16444lqjvfk0tuj2ftdh7kavq530fbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADGU3-m9VJWBVdNTNFII_LolYz8FukYG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225886272702-q16444lqjvfk0tuj2ftdh7kavq530fbo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

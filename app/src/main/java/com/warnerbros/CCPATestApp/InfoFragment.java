@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
@@ -22,12 +23,15 @@ import java.net.URL;
 
 public class InfoFragment extends Fragment {
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_info, container, false);
+            View v = inflater.inflate(R.layout.fragment_info, container, false);
+            Toolbar toolbar = v.findViewById(R.id.app_bar);
+            TextView title = toolbar.findViewById(R.id.toolbar_title);
+            title.setText("Information");
+            title.setBackground(null);
+            return v;
     }
 
 

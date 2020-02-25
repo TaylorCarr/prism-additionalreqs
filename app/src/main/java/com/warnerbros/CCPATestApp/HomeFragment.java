@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -39,14 +40,22 @@ public class HomeFragment extends Fragment {
     AdView mAdView;
     TextView homeText, settingsText;
     SharedPreferences settings;
-
+    Bundle networkExtrasBundle;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         mAdView = (AdView) v.findViewById(R.id.testAd);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("EF0600F38A7C201000993B6569A7051D").build();
+        networkExtrasBundle = new Bundle();
+
+        if(dns){
+            networkExtrasBundle.putInt("rdp", 1);
+        } else {
+            networkExtrasBundle.putInt("rdp", 0);
+        }
+
+        AdRequest adRequest = new AdRequest.Builder().addNetworkExtrasBundle(AdMobAdapter.class, networkExtrasBundle).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice("EF0600F38A7C201000993B6569A7051D").build();
         mAdView.loadAd(adRequest);
 
         homeText = v.findViewById(R.id.homeText);
@@ -55,27 +64,23 @@ public class HomeFragment extends Fragment {
 
         dns = settings.getBoolean("DNS", false);
         if (dns) {
-            settingsText.setText("DNS enabled");
+            settingsText.setText("Personalized Advertising Disabled");
         } else {
-            settingsText.setText("DNS disabled");
+            settingsText.setText("Personalized Advertising Enabled");
         }
 
-        getData getD = new getData();
-        getD.execute();
+            getData getD = new getData();
+            getD.execute();
 
             return v;
     }
 
 
     public class getData extends AsyncTask<String, String, String> {
-
         HttpURLConnection urlConnection;
-
         @Override
         protected String doInBackground(String... args) {
-
             StringBuilder result = new StringBuilder();
-
             try {
                 URL url = new URL("http://ip-api.com/json/");
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -94,8 +99,6 @@ public class HomeFragment extends Fragment {
             finally {
                 urlConnection.disconnect();
             }
-
-
             return result.toString();
         }
 
@@ -106,7 +109,7 @@ public class HomeFragment extends Fragment {
             GeoResponse res = g.fromJson(result, GeoResponse.class);
             country = res.getCountry();
             region = res.getRegionName();
-            homeText.setText(country + ", " + region);
+            homeText.setText(region + ", " + country);
         }
 
     }

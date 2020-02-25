@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    String check = "none";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        getData();
+        if(check.equals("none")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        } else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserSettingsFragment()).commit();
+            check = "none";
+        }
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -31,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getData() {
+        if(getIntent().hasExtra("fragment")) {
+            check = getIntent().getStringExtra("fragment");
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -47,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new InfoFragment();
                         break;
                     case R.id.nav_settings:
-                        selectedFragment = new SettingsFragment();
+                        selectedFragment = new UserSettingsFragment();
                         break;
                 }
 
