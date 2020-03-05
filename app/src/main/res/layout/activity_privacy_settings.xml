@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="230dp"
             android:gravity="center_horizontal"
             android:text="@string/policylink" />
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="false"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="255dp"
+            android:layout_marginTop="250dp"
             android:gravity="center_horizontal"
             android:text="@string/policycenterlink" />
 
@@ -88,5 +88,24 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/dnsFlagText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linebottom"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="DNS currently disabled"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/iabStringText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dnsFlagText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp" />
 
 </RelativeLayout>

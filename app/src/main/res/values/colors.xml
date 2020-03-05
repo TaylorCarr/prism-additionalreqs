@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="toolbarBG">#FFFFFF</color>
     <color name="WBBlue">#005AAE</color>
-    <color name="fragmentBG">#EEE5E9</color>
+<!--    <color name="fragmentBG">#EEE5E9</color>-->
     <color name="black">#000000</color>
+    <color name="fragmentBG">#F5F5F5</color>
 </resources>

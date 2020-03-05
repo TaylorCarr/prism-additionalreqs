@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CCPA Test App</string>
+    <string name="app_name">WarnerMedia Privacy Test App</string>
     <string name="nav_home">Home</string>
     <string name="nav_info">Info</string>
     <string name="nav_settings">Settings</string>
@@ -13,6 +13,7 @@
     <string name="vendorlistlink">Vendor List</string>
     <string name="vendorlisttext">We share your information with these third-party vendors in order to show relevant content to our users.</string>
     <string name="settings_name">Settings</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string-array name="settings">
         <item>Notification Settings</item>
         <item>Privacy Settings</item>

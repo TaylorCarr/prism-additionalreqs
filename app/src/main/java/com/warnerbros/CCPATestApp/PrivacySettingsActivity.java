@@ -1,6 +1,7 @@
 package com.warnerbros.CCPATestApp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +23,10 @@ import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
+import com.turner.nexus.wmPrivacySdk.WmPrivacySdk;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +34,7 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -45,7 +50,7 @@ public class PrivacySettingsActivity extends AppCompatActivity {
     boolean dns;
     Toolbar toolbar;
     Switch dnsSwitch;
-    TextView policyCenterText,policyText, vendorText, title;
+    TextView policyCenterText,policyText, vendorText, title, dnsFlagText, iabStringText;
     AlertDialog confirmation;
     AlertDialog.Builder builder;
     SharedPreferences settings;
@@ -73,12 +78,60 @@ public class PrivacySettingsActivity extends AppCompatActivity {
             }
         });
 
-
+        dnsFlagText = (TextView) findViewById(R.id.dnsFlagText);
+        iabStringText = (TextView) findViewById(R.id.iabStringText);
         policyCenterText = (TextView) findViewById(R.id.policyCenter);
         policyText = (TextView) findViewById(R.id.policyText);
         vendorText = (TextView) findViewById(R.id.vendorText);
         policyText.setMovementMethod(LinkMovementMethod.getInstance());
         dnsSwitch = findViewById(R.id.dnsSwitch);
+
+        WmPrivacySdk privacyInstance = new WmPrivacySdk() {
+            @Override
+            public void close() throws IOException {
+
+            }
+
+            @Override
+            public void initPrism(@NotNull String s, @NotNull String s1, @NotNull Context context) {
+
+            }
+
+            @Override
+            public void ccpaDoNotShare(@NotNull Context context) {
+
+            }
+
+            @Override
+            public void ccpaShareData(@NotNull Context context) {
+
+            }
+
+            @Override
+            public void __uspapi(@NotNull String s, @NotNull Context context) {
+
+            }
+
+            @Nullable
+            @Override
+            public String getUSPString(@NotNull Context context) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Integer getUSPInt(@NotNull Context context) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Boolean getUSPBoolean(@NotNull Context context) {
+                return null;
+            }
+        };
+        privacyInstance.initPrism("WarnerMedia Privacy Test App","prod",this);
+        privacyInstance.__uspapi("CCPADoNotShare", this);
 
         getData getData = new getData();
         getData.execute();
@@ -87,6 +140,8 @@ public class PrivacySettingsActivity extends AppCompatActivity {
         dns = settings.getBoolean("DNS", false);
         if(dns){
             dnsSwitch.setChecked(true);
+            dnsFlagText.setText("DNS Currently Enabled");
+            iabStringText.setText("IAB String: " + privacyInstance.getUSPString(this));
         }
 
         vendorText.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +220,56 @@ public class PrivacySettingsActivity extends AppCompatActivity {
         editor.putBoolean("DNS", dns);
         editor.commit();
         FirebaseAnalytics.getInstance(this).setUserProperty( ALLOW_AD_PERSONALIZATION_SIGNALS, "false" );
+
+        WmPrivacySdk wmPrivacySDKInstance = new WmPrivacySdk() {
+            @Override
+            public void close() throws IOException {
+
+            }
+
+            @Override
+            public void initPrism(@NotNull String s, @NotNull String s1, @NotNull Context context) {
+
+            }
+
+            @Override
+            public void ccpaDoNotShare(@NotNull Context context) {
+
+            }
+
+            @Override
+            public void ccpaShareData(@NotNull Context context) {
+
+            }
+
+            @Override
+            public void __uspapi(@NotNull String s, @NotNull Context context) {
+
+            }
+
+            @Nullable
+            @Override
+            public String getUSPString(@NotNull Context context) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Integer getUSPInt(@NotNull Context context) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Boolean getUSPBoolean(@NotNull Context context) {
+                return null;
+            }
+        };
+        wmPrivacySDKInstance.initPrism("CCPATestApp", "developer", this);
+        wmPrivacySDKInstance.__uspapi("ccpaDoNotShare",this);
+        System.out.println("DNS is currently: " + wmPrivacySDKInstance.getUSPBoolean(this) );
+        dnsFlagText.setText("DNS Currently Enabled");
+
     }
 
     private void optIn(){
@@ -180,6 +285,7 @@ public class PrivacySettingsActivity extends AppCompatActivity {
         editor.putBoolean("DNS", dns);
         editor.commit();
         FirebaseAnalytics.getInstance(this).setUserProperty( ALLOW_AD_PERSONALIZATION_SIGNALS, "true" );
+        dnsFlagText.setText("DNS Currently Disabled");
 
     }
 
