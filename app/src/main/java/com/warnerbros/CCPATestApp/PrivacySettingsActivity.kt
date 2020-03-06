@@ -28,6 +28,8 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
+import com.turner.nexus.wmPrivacySdk.WmPrivacySdk
+
 
 class PrivacySettingsActivity : AppCompatActivity() {
     private var country: String? = null
@@ -46,6 +48,7 @@ class PrivacySettingsActivity : AppCompatActivity() {
     var settings: SharedPreferences? = null
     var GDPR_Countries = ArrayList(
             Arrays.asList("Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"))
+    val privacyInstance = WmPrivacySdk(mapOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,14 +70,17 @@ class PrivacySettingsActivity : AppCompatActivity() {
         vendorText = findViewById<View>(R.id.vendorText) as TextView
         policyText!!.movementMethod = LinkMovementMethod.getInstance()
         dnsSwitch = findViewById(R.id.dnsSwitch)
+        
+        privacyInstance.initPrism("WMPrivacyTestApp", "prod", this)
+
         val getData = getData()
         getData.execute()
         settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         dns = settings!!.getBoolean("DNS", false)
+        iabStringText!!.text = "IAB String: " + privacyInstance.getUSPString(this)
         if (dns) {
             dnsSwitch!!.setChecked(true)
             dnsFlagText!!.text = "DNS Currently Enabled"
-            iabStringText!!.text = "IAB String: " + " "
         }
         vendorText!!.setOnClickListener { v ->
             val i = Intent(v.context, VendorListActivity::class.java)
@@ -119,33 +125,28 @@ class PrivacySettingsActivity : AppCompatActivity() {
 
     private fun optOut() {
         dns = true
-        val networkExtrasBundle = Bundle()
-        networkExtrasBundle.putInt("rdp", 1)
-        val request = AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter::class.java, networkExtrasBundle)
-                .build()
+
         settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         val editor = settings!!.edit()
         editor.putInt("gad_rdp", 1)
         editor.putBoolean("DNS", dns)
         editor.commit()
-        FirebaseAnalytics.getInstance(this).setUserProperty(FirebaseAnalytics.UserProperty.ALLOW_AD_PERSONALIZATION_SIGNALS, "false")
+
+        privacyInstance.ccpaDoNotShare(this)
+
+        iabStringText!!.text = "IAB String: " + privacyInstance.getUSPString(this)
         dnsFlagText!!.text = "DNS Currently Enabled"
     }
 
     private fun optIn() {
         dns = false
-        val networkExtrasBundle = Bundle()
-        networkExtrasBundle.putInt("rdp", 0)
-        val request = AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter::class.java, networkExtrasBundle)
-                .build()
         settings = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         val editor = settings!!.edit()
         editor.putInt("gad_rdp", 0)
         editor.putBoolean("DNS", dns)
         editor.commit()
-        FirebaseAnalytics.getInstance(this).setUserProperty(FirebaseAnalytics.UserProperty.ALLOW_AD_PERSONALIZATION_SIGNALS, "false")
+        privacyInstance.ccpaShareData(this)
+        iabStringText!!.text = "IAB String: " + privacyInstance.getUSPString(this)
         dnsFlagText!!.text = "DNS Currently Disabled"
     }
 
