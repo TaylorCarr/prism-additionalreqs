@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='CCPA Test App'
+rootProject.name='WarnerMedia Privacy Test App'
