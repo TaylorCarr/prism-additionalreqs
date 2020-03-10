@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.turner.nexus.wmPrivacySdk.WmPrivacySdk;
+import com.turner.nexus.wmPrivacySdk.WmPrivacySdkBlockImplKt;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.firebase.analytics.FirebaseAnalytics.UserProperty.ALLOW_AD_PERSONALIZATION_SIGNALS;
 
@@ -54,7 +58,55 @@ public class PrivacySettingsActivity extends AppCompatActivity {
     AlertDialog confirmation;
     AlertDialog.Builder builder;
     SharedPreferences settings;
-    WmPrivacySdk privacyInstance = new WmPrivacySdk();
+    Map<String, String> empty = new HashMap<String, String>();
+    Map<String, String> map = Collections.unmodifiableMap(empty);
+
+    WmPrivacySdk privacyInstance = new WmPrivacySdk() {
+
+        @Override
+        public void initPrism(@NotNull String s, @NotNull String s1, @NotNull Context context) {
+            WmPrivacySdkBlockImplKt.WmPrivacySdk(map).initPrism(s, s1, context);
+        }
+
+        @Override
+        public void ccpaDoNotShare(@NotNull Context context) {
+            WmPrivacySdkBlockImplKt.WmPrivacySdk(map).ccpaDoNotShare(context);
+        }
+
+        @Override
+        public void ccpaShareData(@NotNull Context context) {
+            WmPrivacySdkBlockImplKt.WmPrivacySdk(map).ccpaShareData(context);
+        }
+
+        @Override
+        public void __uspapi(@NotNull String s, @NotNull Context context) {
+            WmPrivacySdkBlockImplKt.WmPrivacySdk(map).__uspapi(s,context);
+        }
+
+        @Nullable
+        @Override
+        public String getUSPString(@NotNull Context context) {
+            return WmPrivacySdkBlockImplKt.WmPrivacySdk(map).getUSPString(context);
+        }
+
+        @Nullable
+        @Override
+        public Integer getUSPInt(@NotNull Context context) {
+            return WmPrivacySdkBlockImplKt.WmPrivacySdk(map).getUSPInt(context);
+        }
+
+        @Nullable
+        @Override
+        public Boolean getUSPBoolean(@NotNull Context context) {
+            return WmPrivacySdkBlockImplKt.WmPrivacySdk(map).getUSPBoolean(context);
+        }
+
+        @Override
+        public void close() throws IOException {
+
+        }
+    };
+
 
 
     ArrayList<String> GDPR_Countries = new ArrayList<String>(
@@ -95,10 +147,10 @@ public class PrivacySettingsActivity extends AppCompatActivity {
 
         settings = getSharedPreferences("PREFS", MODE_PRIVATE);
         dns = settings.getBoolean("DNS", false);
+        iabStringText.setText("IAB String: " +privacyInstance.getUSPString(this));
         if(dns){
             dnsSwitch.setChecked(true);
             dnsFlagText.setText("DNS Currently Enabled");
-            iabStringText.setText("IAB String: " + privacyInstance.getUSPString(this));
         }
 
         vendorText.setOnClickListener(new View.OnClickListener() {
@@ -178,10 +230,10 @@ public class PrivacySettingsActivity extends AppCompatActivity {
         editor.commit();
         FirebaseAnalytics.getInstance(this).setUserProperty( ALLOW_AD_PERSONALIZATION_SIGNALS, "false" );
 
-        privacyInstance.ccpaDoNotShare();
+        privacyInstance.ccpaDoNotShare(this);
         System.out.println("DNS is currently: " + privacyInstance.getUSPBoolean(this) );
         dnsFlagText.setText("DNS Currently Enabled");
-
+        iabStringText.setText("IAB String: " +privacyInstance.getUSPString(this));
     }
 
     private void optIn(){
@@ -197,9 +249,9 @@ public class PrivacySettingsActivity extends AppCompatActivity {
         editor.putBoolean("DNS", dns);
         editor.commit();
         FirebaseAnalytics.getInstance(this).setUserProperty( ALLOW_AD_PERSONALIZATION_SIGNALS, "true" );
-        privacyInstance.ccpaShareData();
+        privacyInstance.ccpaShareData(this);
         dnsFlagText.setText("DNS Currently Disabled");
-
+        iabStringText.setText("IAB String: " +privacyInstance.getUSPString(this));
     }
 
     public class getData extends AsyncTask<String, String, String> {
