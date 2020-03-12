@@ -1,11 +1,9 @@
-package com.warnerbros.CCPATestApp;
+package com.warnermedia.PrivacyTestApp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,15 +11,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.turner.nexus.wmPrivacySdk.WmPrivacySdk;
-import com.turner.nexus.NexusPlatform;
+
 import static com.turner.nexus.Android_native_apiKt.initializeNexus;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.Closeable;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 

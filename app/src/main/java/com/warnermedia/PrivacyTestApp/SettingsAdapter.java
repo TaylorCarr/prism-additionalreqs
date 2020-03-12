@@ -1,4 +1,4 @@
-package com.warnerbros.CCPATestApp;
+package com.warnermedia.PrivacyTestApp;
 
 import android.content.Context;
 import android.content.Intent;

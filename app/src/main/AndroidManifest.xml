@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.warnerbros.CCPATestApp">
+    package="com.warnermedia.PrivacyTestApp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -13,23 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_wb_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SplashScreen"
+        <activity android:name="com.warnermedia.PrivacyTestApp.SplashScreen"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PrivacySettingsActivity"
+        <activity android:name="com.warnermedia.PrivacyTestApp.PrivacySettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
             </intent-filter>
         </activity>
-         <activity android:name=".MainActivity"
+         <activity android:name="com.warnermedia.PrivacyTestApp.MainActivity"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         />
-        <activity android:name=".VendorListActivity"
+        <activity android:name="com.warnermedia.PrivacyTestApp.VendorListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
         <meta-data

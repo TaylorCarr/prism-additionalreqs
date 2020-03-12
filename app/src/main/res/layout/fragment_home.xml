@@ -20,22 +20,11 @@
         layout="@layout/app_bar"
         />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/testAd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7896881809238324/7922690389"
-        />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/homeCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/testAd"
+        android:layout_below="@id/app_bar"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"

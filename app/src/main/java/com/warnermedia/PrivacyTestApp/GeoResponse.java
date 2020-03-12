@@ -1,4 +1,4 @@
-package com.warnerbros.CCPATestApp;
+package com.warnermedia.PrivacyTestApp;
 
 import com.google.gson.annotations.SerializedName;
 
